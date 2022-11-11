@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import Error from "./Error";
 
-const Form = () => {
+const Form = ({ patient, setPatient }) => {
   const [name, setName] = useState('');
   const [owner, setOwner] = useState('');
   const [email, setEmail] = useState('');
   const [date, setDate] = useState('');
   const [sympton, setSympton] = useState('');
   const [error, setError] = useState(false);
+
+  
 
   const handleSubmit = (e) => {
       e.preventDefault()
@@ -16,9 +19,25 @@ const Form = () => {
         return;
       } 
       setError(false)
+
+      const patientObj = {
+        name, 
+        owner,
+        email,
+        date, 
+        sympton
+      }
+
+      setPatient([...patient, patientObj]);
+
+      setName('')
+      setOwner('')
+      setEmail('')
+      setDate('')
+      setSympton('')
+    
+
   }
-
-
 
   return (
     <div className="md:w-1/2 lg:w-2/5 mx-5">
@@ -35,11 +54,7 @@ const Form = () => {
         onSubmit={handleSubmit} 
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
 
-        { error &&
-            <div className="bg-red-800 text-white text-center p-3 uppercase font-bold mb-3 rounded-md">
-              Todos los campos son obligatorios
-            </div>
-          }
+        { error && <Error><p>Todos los campos son obligatorios</p></Error> }
 
           <div className="mb-5">
               <label
