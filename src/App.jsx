@@ -8,7 +8,7 @@ function App() {
     <div className="container mx-auto mt-20">
       <Header/>
 
-      <div className="mt-12 m:flex">
+      <div className="mt-12 md:flex">
         <Form/>
         <PatientList/>
       </div>
