@@ -27,7 +27,7 @@ const Patient = ({patient, setPatient, deletePatient}) => {
         <span className="font-normal normal-case">{email}</span>
       </p>
       <p className="font-bold mb-3 text-gray-700 uppercase">
-        Correo: {""}
+        Fecha: {""}
         <span className="font-normal normal-case">{date}</span>
       </p>
       <p className="font-bold mb-3 text-gray-700 uppercase">

@@ -35,11 +35,12 @@ const Form = ({ patients, setPatients, patient, setPatient }) => {
       } 
       setError(false)
 
+
       const patientObj = {
         name, 
         owner,
         email,
-        date, 
+        date,
         symptom,
         id: idGenerator()
       }
