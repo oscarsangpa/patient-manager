@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Error from "./Error";
 
-const Form = ({ patient, setPatient }) => {
+const Form = ({ patients, setPatients, patient, setPatient }) => {
   const [name, setName] = useState('');
   const [owner, setOwner] = useState('');
   const [email, setEmail] = useState('');
   const [date, setDate] = useState('');
-  const [sympton, setSympton] = useState('');
+  const [symptom, setSympton] = useState('');
   const [error, setError] = useState(false);
 
-  
+  useEffect(() => {
+    if(Object.keys(patient).length > 0) {
+      setName(patient.name)
+      setOwner(patient.owner)
+      setEmail(patient.email)
+      setDate(patient.date)
+      setSympton(patient.symptom)
+    }
+
+  }, [patient])
+
+  const idGenerator = () => {
+    const fecha = Date.now()
+    const random = Math.random(fecha).toString(36).substring(2)
+    return random
+  }
 
   const handleSubmit = (e) => {
       e.preventDefault()
 
-      if( [name, owner, email, date, sympton].includes('')) {
+      if( [name, owner, email, date, symptom].includes('')) {
         setError(true)
         return;
       } 
@@ -25,10 +40,22 @@ const Form = ({ patient, setPatient }) => {
         owner,
         email,
         date, 
-        sympton
+        symptom,
+        id: idGenerator()
       }
 
-      setPatient([...patient, patientObj]);
+      if(patient.id) {
+        patientObj.id = patient.id
+
+        const updatePatients = patients.map( patientState => patientState.id === patient.id ? patientObj : patientState )
+        setPatients(updatePatients)
+        setPatient({})
+
+      } else {
+        patientObj.id = idGenerator()
+        setPatients([...patients, patientObj]);
+      }
+
 
       setName('')
       setOwner('')
@@ -116,13 +143,13 @@ const Form = ({ patient, setPatient }) => {
 
             <div className="mb-5">
               <label
-                htmlFor="sympton" 
+                htmlFor="symptom" 
                 className="block text-gray-700 uppercase font-bold">Síntomas</label>
            <textarea
-              id="sympton"
+              id="symptom"
               className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
               placeholder="Describe los síntomas"
-              value={sympton}
+              value={symptom}
               onChange={ (e) => setSympton(e.target.value) }
            />
 
@@ -132,7 +159,7 @@ const Form = ({ patient, setPatient }) => {
               type="submit"
               className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700
               cursor-pointer transition-colors"
-              value="Agregar paciente"
+              value={ patient.id ? 'Editar paciente' : 'Agregar paciente '}
             />
               
       </form>
