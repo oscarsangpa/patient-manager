@@ -12,7 +12,6 @@ function App() {
     const obteinLS = () => {
       const patientsLS = JSON.parse(localStorage.getItem('patients')) ?? [];
       patientsLS.length > 0 && setPatients(patientsLS)
-      console.log(patientsLS)
     }
 
     obteinLS()
