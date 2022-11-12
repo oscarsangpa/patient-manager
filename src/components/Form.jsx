@@ -86,7 +86,7 @@ const Form = ({ patients, setPatients, patient, setPatient }) => {
           <div className="mb-5">
               <label
                 htmlFor="name" 
-                className="block text-gray-700 uppercase font-bold">Nombre Mascota</label>
+                className="block text-gray-700 uppercase font-bold">Mascota</label>
               <input
                 id="name"
                 type="text"
@@ -100,7 +100,7 @@ const Form = ({ patients, setPatients, patient, setPatient }) => {
             <div className="mb-5">
               <label
                 htmlFor="owner" 
-                className="block text-gray-700 uppercase font-bold">Nombre propietario</label>
+                className="block text-gray-700 uppercase font-bold">propietario/a</label>
 
               <input
                 id="owner"
@@ -115,7 +115,7 @@ const Form = ({ patients, setPatients, patient, setPatient }) => {
             <div className="mb-5">
               <label
                 htmlFor="email" 
-                className="block text-gray-700 uppercase font-bold">Nombre propietario</label>
+                className="block text-gray-700 uppercase font-bold">Correo</label>
 
               <input
                 id="email"
