@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Error from "./Error";
 
-const Form = ({ patients, setPatients }) => {
+const Form = ({ patients, setPatients, patient, setPatient }) => {
   const [name, setName] = useState('');
   const [owner, setOwner] = useState('');
   const [email, setEmail] = useState('');
   const [date, setDate] = useState('');
   const [symptom, setSympton] = useState('');
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if(Object.keys(patient).length > 0) {
+      setName(patient.name)
+      setOwner(patient.owner)
+      setEmail(patient.email)
+      setDate(patient.date)
+      setSympton(patient.symptom)
+    }
+
+  }, [patient])
 
   const idGenerator = () => {
     const fecha = Date.now()
@@ -33,7 +44,18 @@ const Form = ({ patients, setPatients }) => {
         id: idGenerator()
       }
 
-      setPatients([...patients, patientObj]);
+      if(patient.id) {
+        patientObj.id = patient.id
+
+        const updatePatients = patients.map( patientState => patientState.id === patient.id ? patientObj : patientState )
+        setPatients(updatePatients)
+        setPatient({})
+
+      } else {
+        patientObj.id = idGenerator()
+        setPatients([...patients, patientObj]);
+      }
+
 
       setName('')
       setOwner('')
@@ -137,7 +159,7 @@ const Form = ({ patients, setPatients }) => {
               type="submit"
               className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700
               cursor-pointer transition-colors"
-              value="Agregar paciente"
+              value={ patient.id ? 'Editar paciente' : 'Agregar paciente '}
             />
               
       </form>
