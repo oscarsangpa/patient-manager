@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { idGenerator } from "../helpers";
 import Error from "./Error";
 
 const Form = ({ patients, setPatients, patient, setPatient }) => {
@@ -20,11 +21,6 @@ const Form = ({ patients, setPatients, patient, setPatient }) => {
 
   }, [patient])
 
-  const idGenerator = () => {
-    const fecha = Date.now()
-    const random = Math.random(fecha).toString(36).substring(2)
-    return random
-  }
 
   const handleSubmit = (e) => {
       e.preventDefault()

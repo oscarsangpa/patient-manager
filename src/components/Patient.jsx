@@ -1,4 +1,4 @@
-import React from "react";
+import { formatDate } from "../helpers";
 
 const Patient = ({patient, setPatient, deletePatient}) => {
     const {name, owner, email, date, symptom, id} = patient;
@@ -28,7 +28,7 @@ const Patient = ({patient, setPatient, deletePatient}) => {
       </p>
       <p className="font-bold mb-3 text-gray-700 uppercase">
         Correo: {""}
-        <span className="font-normal normal-case">{date}</span>
+        <span className="font-normal normal-case">{formatDate(date)}</span>
       </p>
       <p className="font-bold mb-3 text-gray-700 uppercase">
         Síntomas: {""}
